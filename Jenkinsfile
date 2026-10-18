@@ -1,7 +1,7 @@
 pipeline {
   agent any
   environment {
-    IMAGE_NAME = 'fakhriizzulhaq/simple-app'
+    IMAGE_NAME = 'mychelmunthe/munthe'
     REGISTRY_CREDENTIALS = 'dockerhub-credentials'
   }
   stages {
