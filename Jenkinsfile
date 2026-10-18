@@ -1,14 +1,24 @@
 pipeline {
   agent any
   environment {
-    IMAGE_NAME = 'youruser/simple-app'
+    IMAGE_NAME = 'fakhriizzulhaq/simple-app'
     REGISTRY_CREDENTIALS = 'dockerhub-credentials'
   }
   stages {
-    stage('Checkout') { steps { checkout scm } }
-    stage('Build') { steps { bat 'echo "Build di Windows"' } }
+    stage('Checkout') { 
+      steps { 
+        checkout scm 
+      } 
+    }
+    stage('Build App') { 
+      steps { 
+        bat 'echo "Mulai build proyek..."' 
+      } 
+    }
     stage('Build Docker Image') {
-      steps { bat "docker build -t %IMAGE_NAME%:%BUILD_NUMBER% ." }
+      steps { 
+        bat "docker build -t %IMAGE_NAME%:%BUILD_NUMBER% ." 
+      }
     }
     stage('Push Docker Image') {
       steps {
