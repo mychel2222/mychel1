@@ -9,11 +9,8 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                // Memakai PowerShell dan langsung memanggil command docker dengan mencakup folder bin
-                powershell '''
-                    $env:PATH += ";C:\\Program Files\\Docker\\Docker\\resources\\bin;C:\\Program Files\\Docker\\Docker\\resources"
-                    docker build -t mychelmunthe/munthe:%BUILD_NUMBER% .
-                '''
+                // Memanggil file .exe Docker secara langsung lewat path absolut di PowerShell
+                powershell '"C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.exe" build -t mychelmunthe/munthe:%BUILD_NUMBER% .'
             }
         }
     }
