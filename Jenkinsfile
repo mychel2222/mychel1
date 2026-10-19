@@ -9,8 +9,15 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                // Menggunakan operator & khas PowerShell untuk menjalankan path yang ada spasinya
-                powershell '& "C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.exe" build -t mychelmunthe/munthe:%BUILD_NUMBER% .'
+                powershell '''
+                    $dockerPath = (Get-ChildItem -Path "C:\\Program Files\\Docker\\Docker" -Filter "docker.exe" -Recurse -ErrorAction SilentlyContinue | Select-Object -ExpandProperty FullName -First 1)
+                    if ($dockerPath) {
+                        Write-Host "Lokasi docker ditemukan di: $dockerPath"
+                        & $dockerPath build -t mychelmunthe/munthe:$env:BUILD_NUMBER .
+                    } else {
+                        Write-Error "File docker.exe tidak ditemukan di folder Docker!"
+                    }
+                '''
             }
         }
     }
