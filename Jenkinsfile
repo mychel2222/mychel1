@@ -9,9 +9,8 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                // Menggunakan tanda kutip tunggal untuk blok PowerShell, 
-                // dan membungkus path dengan kutip dua
-                powershell '"C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.exe" build -t mychelmunthe/munthe:%BUILD_NUMBER% .'
+                // Menggunakan operator & khas PowerShell untuk menjalankan path yang ada spasinya
+                powershell '& "C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.exe" build -t mychelmunthe/munthe:%BUILD_NUMBER% .'
             }
         }
     }
