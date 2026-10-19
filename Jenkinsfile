@@ -9,7 +9,8 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                // Memanggil file .exe Docker secara langsung lewat path absolut di PowerShell
+                // Menggunakan tanda kutip tunggal untuk blok PowerShell, 
+                // dan membungkus path dengan kutip dua
                 powershell '"C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.exe" build -t mychelmunthe/munthe:%BUILD_NUMBER% .'
             }
         }
