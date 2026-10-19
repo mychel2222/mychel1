@@ -9,8 +9,11 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                // Gunakan path lengkap ke docker.exe berikut tanda petiknya:
-                bat '"C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.exe" build -t mychelmunthe/munthe:%BUILD_NUMBER% .'
+                // Tambahkan folder Docker ke PATH secara langsung, lalu jalankan docker build
+                bat '''
+                    set PATH=%PATH%;C:\\Program Files\\Docker\\Docker\\resources\\bin;C:\\Program Files\\Docker\\Docker\\resources
+                    docker build -t mychelmunthe/munthe:%BUILD_NUMBER% .
+                '''
             }
         }
     }
